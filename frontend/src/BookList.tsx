@@ -5,6 +5,8 @@ function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  // State to store sort order: "asc" or "desc"
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -12,6 +14,7 @@ function BookList() {
         `http://localhost:5203/api/book?page=${pageNumber}&pageSize=5`
       );
       const data = await response.json();
+      // Assume the API returns an object with a "books" array and "totalPages"
       setBooks(data.books);
       setTotalPages(data.totalPages);
     };
@@ -19,18 +22,49 @@ function BookList() {
     fetchBooks();
   }, [pageNumber]);
 
+  // Create a sorted copy of the books array
+  const sortedBooks = [...books].sort((a, b) => {
+    const compareResult = a.title.localeCompare(b.title);
+    return sortOrder === "asc" ? compareResult : -compareResult;
+  });
+
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setPageNumber(newPage);
     }
   };
 
+  const handleSortChange = (order: "asc" | "desc") => {
+    setSortOrder(order);
+  };
+
   return (
     <div className="container my-5">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2>Book List</h2>
+        {/* Sorting Controls */}
+        <div>
+          <label htmlFor="sortSelect" className="me-2">
+            Sort by Book Name:
+          </label>
+          <select
+            id="sortSelect"
+            value={sortOrder}
+            onChange={(e) =>
+              handleSortChange(e.target.value as "asc" | "desc")
+            }
+            className="form-select d-inline-block w-auto"
+          >
+            <option value="asc">A to Z</option>
+            <option value="desc">Z to A</option>
+          </select>
+        </div>
+      </div>
+
       <div className="row">
-        {books.map((b) => (
+        {sortedBooks.map((b) => (
           <div key={b.isbn} className="col-md-6 col-lg-4 mb-4">
-            <div className="card h-100 shadow-sm">
+            <div className="card h-100 shadow-sm border border-secondary">
               <div className="card-header bg-primary text-white">
                 <h5 className="card-title mb-0">{b.title}</h5>
               </div>

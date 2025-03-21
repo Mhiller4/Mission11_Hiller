@@ -15,18 +15,23 @@ namespace Mission11.API.Controllers
         
         public BookController(BookDbContext temp) => _context = temp;
         
+     
         [HttpGet]
-        public IEnumerable <Project> GetProjects()
+        public IActionResult GetProjects(int page = 1)
         {
-            return _context.Books.ToList(); 
+            int pageSize = 5;
+            int totalBooks = _context.Books.Count();
+            int totalPages = (int)Math.Ceiling((double)totalBooks / pageSize);
+
+            var books = _context.Books
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return Ok(new { books, totalPages });
         }
 
-        // [HttpGet("GetBook/{id}")]
-        // public IEnumerable<Project> GetProjects(Guid id)
-        // {
-        //     var bookSpecific = _context.Books.Where(p => p.ProjectFunctionalityStatus =="Functional").ToList();
-        //     return bookSpecific;
-        // }
+        
     }
 }
 
