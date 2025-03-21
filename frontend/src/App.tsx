@@ -9,9 +9,10 @@ function Welcome(){
   return(
 
     <>
-    <h1> Mission 11</h1>
-    <h1> <strong> Online Bookstore</strong></h1>
-    
+    <div className="container text-center my-4">
+    <h1 className="display-4">Mission 11</h1>
+    <h1 className="display-5 fw-bold">Online Bookstore</h1>
+  </div>
     </>
   );
 
