@@ -17,7 +17,7 @@ namespace Mission11.API.Controllers
         
      
         [HttpGet]
-        public IActionResult GetProjects(int page = 1)
+        public IActionResult GetBooks(int page = 1)
         {
             int pageSize = 5;
             int totalBooks = _context.Books.Count();
@@ -29,6 +29,18 @@ namespace Mission11.API.Controllers
                 .ToList();
 
             return Ok(new { books, totalPages });
+        }
+        // Second route to get stuff Catgegories
+        [HttpGet("GetBooksTypes")]
+        public IActionResult GetBookTypes()
+        {
+
+            var bookTypes = _context.Books
+                .Select(p => p.Category)
+                .Distinct()
+                .ToList();
+
+            return Ok(bookTypes);
         }
 
         
