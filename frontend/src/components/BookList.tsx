@@ -76,6 +76,7 @@ function BookList({selectedCategories} : {selectedCategories: string[]}) {
             <div className="card h-100 shadow-sm border border-secondary">
               <div className="card-header bg-primary text-white">
                 <h5 className="card-title mb-0">{b.title}</h5>
+                <h5 className="card-title mb-0">{b.bookID}</h5>
               </div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
@@ -102,7 +103,7 @@ function BookList({selectedCategories} : {selectedCategories: string[]}) {
               </ul>
               <br />
 
-              <button className='btn btn-primary' onClick={() => navigate(`/cart/${b.title}/${b.price}`)}>Add to Cart</button>
+              <button className='btn btn-primary' onClick={() => navigate(`/cart/${b.title}/${b.price}/${b.bookID}`)}>Add to Cart</button>
             </div>
           </div>
         ))}
