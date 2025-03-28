@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import './App.css'
 import BookList from './BookList';
+import CategoryFilter from './CategoryFilter';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Welcome(){
@@ -21,14 +22,33 @@ function Welcome(){
 
 
 function App() {
+  const[selectedCategories, setSelectedCategories] =useState<string[]>([])
  
 
   return (
     <>
      <Welcome />
     {/* Booklist conponent is added to the App.tsx file  */}
-     <BookList/>
 
+    <div className = 'container'>
+      <div className = "row">
+        <div className = "col-md-3">
+
+        <CategoryFilter 
+        selectedCategories = {selectedCategories} 
+        setSelectedCategories={setSelectedCategories}
+        />
+
+        </div>
+
+        <div className = "col-md-9" >
+        
+        <BookList selectedCategories ={selectedCategories}/>
+
+        </div>
+      
+      </div>
+     </div>
     </>
   )
 }

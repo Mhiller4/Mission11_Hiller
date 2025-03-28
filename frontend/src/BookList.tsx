@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Book } from "./types/Book";
 
-function BookList() {
+function BookList({selectedCategories} : {selectedCategories: string[]}) {
   const [books, setBooks] = useState<Book[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -10,8 +10,15 @@ function BookList() {
 
   useEffect(() => {
     const fetchBooks = async () => {
+
+      const categoryParams = selectedCategories
+      .map((cat) => `bookTypes=${encodeURIComponent(cat)}`)
+      .join('&');
+
+
+
       const response = await fetch(
-        `http://localhost:5203/api/book?page=${pageNumber}&pageSize=5`
+        `http://localhost:5203/api/book?page=${pageNumber}&pageSize=5${selectedCategories.length ? `&${categoryParams}`: ''}`
       );
       const data = await response.json();
       // Assume the API returns an object with a "books" array and "totalPages"
@@ -20,7 +27,7 @@ function BookList() {
     };
 
     fetchBooks();
-  }, [pageNumber]);
+  }, [pageNumber, selectedCategories]);
 
   // Create a sorted copy of the books array
   const sortedBooks = [...books].sort((a, b) => {

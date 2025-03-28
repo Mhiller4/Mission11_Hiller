@@ -17,20 +17,29 @@ namespace Mission11.API.Controllers
         
      
         [HttpGet]
-        public IActionResult GetBooks(int page = 1)
+        public IActionResult GetBooks(int page = 1, [FromQuery] List<string>? bookTypes = null)
         {
+            var query = _context.Books.AsQueryable();
+
+
+            if (bookTypes != null && bookTypes.Any())
+            {
+                query = query.Where(b => bookTypes.Contains(b.Category));
+            }
+            int totalBooks = query.Count();
+            
             int pageSize = 5;
-            int totalBooks = _context.Books.Count();
+           
             int totalPages = (int)Math.Ceiling((double)totalBooks / pageSize);
 
-            var books = _context.Books
+            var books = query
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
             return Ok(new { books, totalPages });
         }
-        // Second route to get stuff Catgegories
+        // Second route to get Categories that are distinct for my checkbox options
         [HttpGet("GetBooksTypes")]
         public IActionResult GetBookTypes()
         {
