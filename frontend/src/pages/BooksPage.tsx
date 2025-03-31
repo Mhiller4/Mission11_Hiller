@@ -3,6 +3,7 @@ import BookList from '../components/BookList';
 import CategoryFilter from '../components/CategoryFilter';
 import Welcome from '../components/Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CartSummary from '../components/CartSummary';
 
 
 
@@ -14,6 +15,8 @@ function BooksPage(){
 
   return(
 <>
+
+<CartSummary/>
     <Welcome />
 
       {/* Booklist conponent is added to the App.tsx file  */}

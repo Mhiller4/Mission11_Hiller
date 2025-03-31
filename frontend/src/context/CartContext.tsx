@@ -33,7 +33,7 @@ export const CartProvider = ({children}: {children: ReactNode})=> {
 
         //Function to remove stuff from Cart
     const removeFromCart = (bookID: number) => {
-        setCart((prevCart) => prevCart.filter((c) => c.bookID === bookID));
+        setCart((prevCart) => prevCart.filter((c) => c.bookID !== bookID));
     }
 
     const clearCart = () => {

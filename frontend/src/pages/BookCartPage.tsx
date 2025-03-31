@@ -2,6 +2,7 @@ import { useNavigate, useParams} from 'react-router-dom';
 import Welcome from '../components/Welcome'
 import { useCart } from '../context/CartContext';
 import {useState} from 'react'
+import { CartItem } from '../types/cart';
 
 
 
@@ -14,15 +15,15 @@ function BookCart(){
     // Calls a function to handle adding to cart
     const handleAddToCart = () => {
         const newItem: CartItem = {
-            bookID,
-            title,
-            price,
+            bookID: Number(bookID),
+            title: title || 'No title Found',
+            price: Number(price),
             quantityAmount}
             addToCart(newItem);
-            navigate('mycart');
+            navigate('/mycart');
         };
 
-    }
+    
 
 
     return(
@@ -30,10 +31,13 @@ function BookCart(){
         <Welcome/>
         <h2>Add to cart {title} </h2>
         <h1>Price {price}</h1>
-        <h1> {bookID}</h1>
         <div>
-        <input type="number" placeholder="Quanity"/>
-        <button onClick = {()=> navigate('/mycart')}>Add to Cart</button>
+        <input 
+            type="number" 
+            placeholder="Quanity" 
+            value={quantityAmount} 
+            onChange={(x)=> setQuantityAmount(Number(x.target.value))}/>
+        <button onClick = {handleAddToCart}>Add to Cart</button>
 
 
         </div>

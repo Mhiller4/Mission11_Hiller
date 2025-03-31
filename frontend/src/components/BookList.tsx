@@ -104,6 +104,18 @@ function BookList({selectedCategories} : {selectedCategories: string[]}) {
               <br />
 
               <button className='btn btn-primary' onClick={() => navigate(`/cart/${b.title}/${b.price}/${b.bookID}`)}>Add to Cart</button>
+
+          
+
+              <div className="offcanvas offcanvas-end" tabIndex={-1} id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+                <div className="offcanvas-header">
+                  <h5 id="cartOffcanvasLabel">Shopping Cart</h5>
+                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div className="offcanvas-body">
+                  {/* Place your cart summary content here */}
+                </div>
+              </div>
             </div>
           </div>
         ))}
