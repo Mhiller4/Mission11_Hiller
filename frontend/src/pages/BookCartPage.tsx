@@ -28,27 +28,42 @@ function BookCart(){
 
     return(
         <>
-        <Welcome/>
-        <h2>Add to cart {title} </h2>
-        <h1>Price {price}</h1>
-        <div>
-        <input 
-            type="number" 
-            placeholder="Quanity" 
-            value={quantityAmount} 
-            onChange={(x)=> setQuantityAmount(Number(x.target.value))}/>
-        <button onClick = {handleAddToCart}>Add to Cart</button>
-
-
+        <Welcome />
+      <div className="container my-4">
+        <div className="card shadow-sm">
+          <div className="card-header bg-primary text-white">
+            <h2 className="mb-0">Add to Cart: {title}</h2>
+          </div>
+          <div className="card-body">
+            <h4 className="card-title">Price: ${Number(price).toFixed(2)}</h4>
+            <div className="mb-3">
+              <label htmlFor="quantity" className="form-label">
+                Quantity:
+              </label>
+              <input
+                id="quantity"
+                type="number"
+                className="form-control"
+                placeholder="Quantity"
+                value={quantityAmount}
+                onChange={(e) => setQuantityAmount(Number(e.target.value))}
+              />
+            </div>
+            <div className="d-flex justify-content-between">
+              <button onClick={handleAddToCart} className="btn btn-success">
+                Add to Cart
+              </button>
+              <button
+                onClick={() => navigate(-1)}
+                className="btn btn-secondary"
+              >
+                Continue Shopping
+              </button>
+            </div>
+          </div>
         </div>
-        <div>
-
-            <button onClick ={()=>navigate(-1)} className='btn-primary'>Continue Shopping</button>
-        
-        </div>
-        
-        
-        </>
+      </div>
+    </>
     );
 }
 
