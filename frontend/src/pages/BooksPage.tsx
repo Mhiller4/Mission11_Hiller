@@ -5,6 +5,8 @@ import Welcome from '../components/Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartSummary from '../components/CartSummary';
 
+import Cart from '../pages/Cart';
+
 
 
 
@@ -18,8 +20,12 @@ function BooksPage(){
 
 <CartSummary/>
     <Welcome />
+    
 
       {/* Booklist conponent is added to the App.tsx file  */}
+
+      
+
 
       <div className = 'container'>
         <div className = "row">
@@ -37,6 +43,8 @@ function BooksPage(){
           <BookList selectedCategories ={selectedCategories}/>
 
           </div>
+
+          
         
         </div>
       </div>
