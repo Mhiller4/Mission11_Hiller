@@ -1,35 +1,49 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Book } from "../types/Book";
+import { fetchBooks } from "../api/BooksAPI";
 
 function BookList({selectedCategories} : {selectedCategories: string[]}) {
   const [books, setBooks] = useState<Book[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(10);
   // State to store sort order: "asc" or "desc"
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const navigate = useNavigate();
+  //new stuff to check for errors
+  const[error, setError] = useState<string | null>(null);
+  const[loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    const fetchBooks = async () => {
+    const loadBooks = async () => {
+      try{
+        setLoading(true);
+        const data = await fetchBooks(pageNumber, selectedCategories); 
 
-      const categoryParams = selectedCategories
-      .map((cat) => `bookTypes=${encodeURIComponent(cat)}`)
-      .join('&');
+        //calls the API 
+        setBooks(data.books);
+        //I'm not sure why this is red? 
+        setTotalPages(data.totalPages);
+        //Total Pages? 
+    } catch (error ){
+      setError((error as Error).message); 
+
+    }finally{
+      setLoading(false);
+    }
+  };
 
 
-
-      const response = await fetch(
-        `http://localhost:5203/api/book?page=${pageNumber}&pageSize=5${selectedCategories.length ? `&${categoryParams}`: ''}`
-      );
-      const data = await response.json();
       // Assume the API returns an object with a "books" array and "totalPages"
-      setBooks(data.books);
-      setTotalPages(data.totalPages);
-    };
+    
 
-    fetchBooks();
-  }, [pageNumber, selectedCategories]);
+    loadBooks();
+  }, [ pageNumber, selectedCategories]);
+
+  if (loading) return <p>Loading Projects. . .</p>
+  if (error) return <p className="text-red-500">Error: {error}</p>
+
 
   // Create a sorted copy of the books array
   const sortedBooks = [...books].sort((a, b) => {

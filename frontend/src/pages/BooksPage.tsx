@@ -17,16 +17,9 @@ function BooksPage(){
 
   return(
 <>
-
 <CartSummary/>
     <Welcome />
-    
-
       {/* Booklist conponent is added to the App.tsx file  */}
-
-      
-
-
       <div className = 'container'>
         <div className = "row">
           <div className = "col-md-3">
@@ -35,17 +28,12 @@ function BooksPage(){
           selectedCategories = {selectedCategories} 
           setSelectedCategories={setSelectedCategories}
           />
-
           </div>
-
-          <div className = "col-md-9" >
+          <div className = "col-md-9" >    
           
           <BookList selectedCategories ={selectedCategories}/>
-
-          </div>
-
           
-        
+          </div>
         </div>
       </div>
 </>
