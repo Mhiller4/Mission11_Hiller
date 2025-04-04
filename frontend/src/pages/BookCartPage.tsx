@@ -3,7 +3,6 @@ import Welcome from '../components/Welcome'
 import { useCart } from '../context/CartContext';
 import {useState} from 'react'
 import { CartItem } from '../types/cart';
-import React from 'react';
 
 
 
