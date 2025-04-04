@@ -30,7 +30,7 @@ const AdminBooksPage = ()=> {
                 //const data = await fetchBooks(3, [] );
                 const data = await fetchBooks(pageNumber, [] );
                 setBooks(data.books);
-                setTotalPages(data.totalPages)
+                setTotalPages(Number(data.totalPages));
 
             }catch (err){
                 setError((err as Error).message)

@@ -7,7 +7,7 @@ function BookList({selectedCategories} : {selectedCategories: string[]}) {
   const [books, setBooks] = useState<Book[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(10);
+
   // State to store sort order: "asc" or "desc"
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function BookList({selectedCategories} : {selectedCategories: string[]}) {
         //calls the API 
         setBooks(data.books);
         //I'm not sure why this is red? 
-        setTotalPages(data.totalPages);
+        setTotalPages(Number(data.totalPages));
         //Total Pages? 
     } catch (error ){
       setError((error as Error).message); 

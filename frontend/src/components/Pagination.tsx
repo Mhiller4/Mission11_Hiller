@@ -7,7 +7,7 @@ interface PaginationProps{
     onPageSizeChange:(newSize: number) => void;
 }
 
-const Pagination = ({currentPage, totalPages, pageSize,onPageChange, onPageSizeChange}: PaginationProps) =>{
+const Pagination = ({currentPage, totalPages, onPageChange, }: PaginationProps) =>{
 
     return(
     <div className="flex item-center justify-center mt-4">

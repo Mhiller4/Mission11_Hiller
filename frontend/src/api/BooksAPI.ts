@@ -1,11 +1,14 @@
 import { Book } from "../types/Book";
 
-interface FetchBooksResponse { 
+interface FetchBooksResponse {
+    totalPages(totalPages: any): unknown; 
     books: Book[];
     totalNumBooks: number; 
 }
 
-const API_URl = 'http://localhost:5203/api'
+const API_URl = 'https://books-hiller-backend.azurewebsites.net/api';
+
+
 
 export const fetchBooks = async (
 
