@@ -14,12 +14,12 @@ builder.Services.AddDbContext<BookDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BookConnection")));
 
 builder.Services.AddCors(options =>
-options.AddPolicy("AllowReactAppBlah", 
+    options.AddPolicy("AllowReactAppBlah",
     policy => {
-                        policy.AllowAnyOrigin()
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-}));
+        policy.WithOrigins("http://localhost:3000", "https://yellow-pond-0e0e0561e.6.azurestaticapps.net/")
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    }));
         
 
 var app = builder.Build();
