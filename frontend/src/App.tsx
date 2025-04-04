@@ -8,6 +8,7 @@ import Cart from './pages/Cart';
 import { CartProvider } from './context/CartContext';
 import CartSummary from './components/CartSummary';
 import AdminBooksPage from './pages/AdminBooksPage';
+import React from 'react';
 
 function App() {
   return (

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Book } from "../types/Book";
 import { fetchBooks } from "../api/BooksAPI";
+import React from "react";
 
 function BookList({selectedCategories} : {selectedCategories: string[]}) {
   const [books, setBooks] = useState<Book[]>([]);

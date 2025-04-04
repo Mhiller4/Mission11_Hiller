@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import './CategoryFilter.css';
+import React from 'react';
 
 function CategoryFilter({
     selectedCategories, 

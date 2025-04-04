@@ -4,6 +4,7 @@ import CategoryFilter from '../components/CategoryFilter';
 import Welcome from '../components/Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartSummary from '../components/CartSummary';
+import React from 'react';
 
 
 

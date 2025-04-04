@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useContext, useState } from 'react';
 import {CartItem} from '../types/cart'
+import React from 'react'
 
 interface CartContextType{
 

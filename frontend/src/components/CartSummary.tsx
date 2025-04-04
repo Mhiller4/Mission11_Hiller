@@ -29,6 +29,7 @@
 
 // export default CartSummary
 
+import React from "react";
 import { useCart } from "../context/CartContext";
 
 const CartSummary = () => {
