@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mission11.API.Data;
 
-public class Project
+public class Book
 {
     // These are the different things required to keep track of in our database,
     // all of these are required. 

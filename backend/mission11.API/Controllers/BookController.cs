@@ -52,6 +52,59 @@ namespace Mission11.API.Controllers
             return Ok(bookTypes);
         }
 
+// Adds a new Book
+        [HttpPost("Add")]
+        public IActionResult addBook([FromBody] Book newBook){
+
+
+            _context.Books.Add(newBook);
+            _context.SaveChanges();
+
+            return Ok(newBook);
+        }
+// Updates a current book 
+        [HttpPut("UpdateBook/{bookID}")]
+        public IActionResult UpdateBook(int bookID, [FromBody] Book updatedBook){
+
+            var existingBook = _context.Books.Find(bookID); 
+             if (existingBook == null)
+            {
+                return NotFound($"Book with ID {bookID} was not found.");
+            }
+
+            existingBook.Title = updatedBook.Title; 
+            existingBook.Author = updatedBook.Author;
+            existingBook.Publisher = updatedBook.Publisher;
+            existingBook.ISBN = updatedBook.ISBN;
+            existingBook.Classification = updatedBook.Classification;
+            existingBook.Category = updatedBook.Category;
+            existingBook.PageCount = updatedBook.PageCount;
+            existingBook.Price = updatedBook.Price;
+
+    // Save changes to the database
+            _context.Books.Update(existingBook);
+            _context.SaveChanges();
+            
+            return Ok(existingBook);
+        }
+
+//Delete Book 
+        [HttpDelete("DeleteBook/{bookID}")]
+        public IActionResult DeleteBook(int bookID){
+            var book = _context.Books.Find(bookID);
+
+            if (book == null){
+
+                return NotFound(new {message = "book not found"});
+            }
+
+            _context.Books.Remove(book);
+            _context.SaveChanges();
+
+            return NoContent();
+
+        }
+
         
     }
 }

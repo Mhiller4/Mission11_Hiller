@@ -9,6 +9,6 @@ public class BookDbContext : DbContext
     {
     }
     
-    public DbSet<Project> Books { get; set; }
+    public DbSet<Book> Books { get; set; }
     
 }
