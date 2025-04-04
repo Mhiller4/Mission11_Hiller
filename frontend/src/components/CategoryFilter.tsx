@@ -19,7 +19,7 @@ function CategoryFilter({
         const fetchCategories = async () => {
 
             try{
-            const response = await fetch("http://localhost:5203/api/book/Getbookstypes")
+            const response = await fetch("https://books-hiller-backend.azurewebsites.net/api/book/Getbookstypes")
             const data = await response.json();
 
             setCategories(data);
